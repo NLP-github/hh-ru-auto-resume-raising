@@ -10,10 +10,11 @@ from fake_useragent import UserAgent
 
 
 class HHru:
-    def __init__(self, phone, password, proxy):
+    def __init__(self, phone, password, email, proxy):
         super().__init__()
         self.phone = phone
         self.password = password
+        self.email = email
         self.proxy = {'https': proxy}
         self.switch = False if proxy == 'None' else True
         self.user_agent = UserAgent().chrome
@@ -24,6 +25,8 @@ class HHru:
         self.resume_active = dict()
         self.notifications = True
 
+    //if self.phone == 0
+    
     async def request(self, method, url, headers=None, data=None):
         async with aiohttp.ClientSession() as session:
             action = getattr(session, method)
@@ -130,3 +133,6 @@ class HHru:
     async def del_resume_active(self, title: str) -> None:
         await asyncio.sleep(0.01)
         return self.resume_active.pop(title, False)
+
+
+
